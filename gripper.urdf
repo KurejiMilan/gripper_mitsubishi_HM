@@ -1,0 +1,126 @@
+<?xml version = "1.0"?>
+<robot name="gripper">
+<!-- the orange axis is x axis, yellow is y and cyan is z axis -->
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.039" length="0.006"/>
+            </geometry>    
+            <origin rpy = "0 0 0 " xyz="0 0 0"/>
+            <collision>
+                <geometry>
+                    <cylinder radius="0.039" length="0.006"/>
+                </geometry>    
+                <origin rpy = "0 0 0 " xyz="0 0 0"/>
+            </collision>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name="gripper_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="first_link"/>
+        <origin xyz="0 0 0.003"/>
+        <axis xyz="0 0 0"/>
+        <limit lower="-1.2" upper="1.2" effort="300" velocity="2.0"/>
+    </joint>
+
+    <link name="first_link">
+        <visual>
+            <geometry>
+                <box size="0.08 0.06 0.069"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.0345"/>
+            <collision>
+                <geometry>
+                    <box size="0.08 0.06 0.069"/>
+                </geometry>
+                <origin rpy="0 0 0" xyz="0 0 0.0345"/>
+            </collision>
+            <material name="yellow">
+                <color rgba="1 1 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name="left_finger_base_joint" type="fixed">
+        <parent link="first_link"/>
+        <child link="left_finger_base"/>
+        <origin xyz="0.0 0.0 0.069"/>
+        <axis xyz="0 0 0"/>
+    </joint>
+
+    <joint name="right_finger_base_joint" type="fixed">
+        <parent link="first_link"/>
+        <child link="right_finger_base"/>
+        <origin xyz="0 0 0.069"/>
+        <axis xyz="0 0 0"/>
+    </joint>
+
+    <link name="left_finger_base">
+        <visual>
+            <geometry>
+                <box size="0.03 0.01 0.008"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.015 0 0.004"/>
+            <material name="blue">
+                <color rgba="0 1 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <link name="right_finger_base">
+        <visual>
+            <geometry>
+                <box size="0.025 0.01 0.008"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="-0.02 0 0.004"/>
+            <material name="blue">
+                <color rgba="0 1 0 1"/>
+            </material>
+        </visual>
+    </link>
+    <!-- might need to modify the axis of translation -->
+    <joint name="left_finger_joint" type="prismatic">
+        <parent link="left_finger_base"/>
+        <child link="left_finger"/>
+        <origin rpy="0 0 0" xyz="0 0 0.005"/>
+        <axis xyz="-1 0 0"/>
+        <limit lower="0.0" upper="0.03" effort="300" velocity="2.0"/>
+    </joint>
+
+    <joint name="right_finger_joint" type="prismatic">
+        <parent link="right_finger_base"/>
+        <child link="right_finger"/>
+        <origin rpy="0 0 0" xyz="0 0 0.005"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="0.0" upper="0.03" effort="300" velocity="2.0"/>
+    </joint>
+    
+    <link name="left_finger">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.035"/>  
+            </geometry>
+            <origin rpy="0 0 0" xyz="-0.005  0 0.0175"/>
+            <material name ="red">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <link name="right_finger">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.035"/>  
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.005 0 0.0175"/>
+            <material name ="red">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+    </link>
+
+</robot>
