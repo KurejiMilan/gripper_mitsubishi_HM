@@ -1,6 +1,6 @@
 import sys
 
-shape = "cylinder" 
+shape = "" 
 ixx = 0.0
 iyy = 0.0
 izz = 0.0
@@ -43,6 +43,8 @@ def check_sys_argv():
 
     # List to store the type converted dimesion
     num_arg = []
+    global shape, mass, radius, depth, width, height
+
     # find the geometry shape
     if sys.argv[1] == "cylinder" or sys.argv[1] == "c":
         shape = "cylinder"
@@ -70,6 +72,8 @@ def check_sys_argv():
         width = num_arg[1]
         height = num_arg[2]
         depth = num_arg[3]
+        # print("this is inside=",shape)
+        # print("mass=",mass, "width=", width, "height=", height, "depth=", depth,"\n")
     else :
         print("passed geometry shape not defined.\n")
         define_usage
@@ -77,12 +81,15 @@ def check_sys_argv():
 
 if __name__ == "__main__":
     check_sys_argv()
+    # print(shape)
     if shape == "cylinder":
         print("calculating tensor_inertia for solid cylinder.\n")
         ixx = iyy = (mass*(3*pow(radius, 2)+pow(height,2)))/12
         izz = (mass*pow(radius,2))/2
+
     elif shape == "box":
         print("calculating tensor_inertia for solid box.\n")
+        # print("mass=",mass, "width=", width, "height=", height, "depth=", depth,"\n")
         ixx = (mass*(pow(height, 2)+pow(depth,2)))/12
         iyy = (mass*(pow(width, 2)+pow(height,2)))/12
         izz = (mass*(pow(width, 2)+pow(depth,2)))/12
