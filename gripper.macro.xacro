@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"
+       name="igus_rebel_6dof" >
+  <!-- Include all igus_rebel_6dof macros -->
+  <!-- this is designed to be put together inside irc_ros_description packges. change package name as required -->
+  <xacro:include filename="$(find irc_ros_description)/urdf/end_effector/gripper.xacro" />
+  <xacro:include filename="$(find irc_ros_description)/urdf/end_effector/gripper.ros2_control.xacro" />
+</robot>

@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="igus_rebel_6dof_01_ros2_control" params="hardware_protocol is_ignition">
+
+    <ros2_control name="igus_rebel_6dof" type="system">
+      <hardware>
+        <!-- mock hardware interface -->
+        <xacro:if value="${hardware_protocol == 'mock_hardware'}">
+          <plugin>mock_components/GenericSystem</plugin>
+        </xacro:if>
+
+        <!-- gazebo hardware interface -->
+        <xacro:if value="${hardware_protocol == 'gazebo'}">
+          <xacro:if value="${is_ignition}">
+            <plugin>ign_ros2_control/IgnitionSystem</plugin>
+          </xacro:if>
+          <xacro:unless value="${is_ignition}">
+            <plugin>gz_ros2_control/GazeboSinSystem</plugin>
+          </xacro:unless>
+        </xacro:if>
+
+      </hardware>
+
+    <joint name="right_finger_joint">
+        <command_interface name="effort"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+    </joint>
+    <joint name="left_finger_joint">
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+    </joint>
+
+
+   </ros2_control>
+  </xacro:macro>
+</robot>

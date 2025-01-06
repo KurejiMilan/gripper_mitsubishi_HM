@@ -69,6 +69,7 @@
     </joint>
 
     <joint name="left_finger_base_joint" type="prismatic">
+        <mimic joint="right_finger_base_joint" multiplier="1" offset="0"/>
         <parent link="gripper_first_link"/>
         <child link="left_finger_base"/>
         <origin xyz="0.0 0.0 0.063"/>
