@@ -10,7 +10,7 @@
     <material name="finger_base_color">
         <color rgba="0.2 0.05098039 0.21960784 1.0"/>
     </material>
-    <link name="base_link">
+    <link name="gripper_base_link">
         <visual>
             <geometry>
                 <cylinder radius="0.039" length="0.006"/>
@@ -32,14 +32,14 @@
     </link>
 
     <joint name="gripper_base" type="fixed">
-        <parent link="base_link"/>
-        <child link="first_link"/>
+        <parent link="gripper_base_link"/>
+        <child link="gripper_first_link"/>
         <origin xyz="0 0 0.006"/>
         <axis xyz="0 0 0"/>
         <limit lower="-1.2" upper="1.2" effort="300" velocity="2.0"/>
     </joint>
 
-    <link name="first_link">
+    <link name="gripper_first_link">
         <visual>
             <geometry>
                 <box size="0.08 0.06 0.063"/>
@@ -61,7 +61,7 @@
     </link>
 
     <joint name="right_finger_base_joint" type="prismatic">
-        <parent link="first_link"/>
+        <parent link="gripper_first_link"/>
         <child link="right_finger_base"/>
         <origin xyz="0 0 0.063"/>
         <axis xyz="1 0 0"/>
@@ -69,7 +69,7 @@
     </joint>
 
     <joint name="left_finger_base_joint" type="prismatic">
-        <parent link="first_link"/>
+        <parent link="gripper_first_link"/>
         <child link="left_finger_base"/>
         <origin xyz="0.0 0.0 0.063"/>
         <axis xyz="-1 0 0"/>
