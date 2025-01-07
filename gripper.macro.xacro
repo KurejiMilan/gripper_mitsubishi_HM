@@ -1,8 +1,17 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"
-       name="igus_rebel_6dof" >
+       name="gripper" >
   <!-- Include all igus_rebel_6dof macros -->
   <!-- this is designed to be put together inside irc_ros_description packges. change package name as required -->
-  <xacro:include filename="$(find irc_ros_description)/urdf/end_effector/gripper.xacro" />
-  <xacro:include filename="$(find irc_ros_description)/urdf/end_effector/gripper.ros2_control.xacro" />
+  <xacro:include filename="$(find irc_ros_description)/urdf/grippers/gripper.urdf" />
+  <xacro:include filename="$(find irc_ros_description)/urdf/grippers/gripper.ros2_control.xacro" />
+  <xacro:macro name="gripper" params="parent_link hardware_protocol is_ignition">
+    <xacro:gripper_controller hardware_protocol="${hardware_protocol}" is_ignition="${is_ignition}" />  
+    <joint name="gripper_world_base" type="fixed">
+      <parent link="flange"/>
+      <child link="gripper_base_link"/>
+      <origin xyz="0 0 0" rpy="0.0 1.57 0.0"/>
+  </joint>
+  </xacro:macro>
 </robot>
+
